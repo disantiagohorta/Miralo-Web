@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/companion-form/:code",
+      "destination": "/companion-form/index.html"
+    }
+  ]
+}
