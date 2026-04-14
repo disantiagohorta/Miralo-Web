@@ -1,8 +1,10 @@
 {
+  "buildCommand": "bash build.sh",
+  "outputDirectory": ".",
   "rewrites": [
     {
-      "source": "/companion-form/:code",
-      "destination": "/companion-form/index.html"
+      "source": "/q/:code",
+      "destination": "/q/index.html"
     }
   ]
 }
