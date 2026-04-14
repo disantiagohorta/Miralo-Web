@@ -254,7 +254,7 @@
       <form class="waitlist-form" id="waitlistForm" onsubmit="handleWaitlist(event)">
         <input class="waitlist-input" type="text" placeholder="Your name" required id="waitlistName" autocomplete="name">
         <input class="waitlist-input" type="email" placeholder="Email" required id="waitlistEmail" autocomplete="email">
-        <input class="waitlist-input" type="tel" placeholder="Phone number" required id="waitlistPhone" autocomplete="tel">
+        <input class="waitlist-input" type="tel" placeholder="Phone number (US only)" required id="waitlistPhone" autocomplete="tel" inputmode="tel">
         <button class="waitlist-submit" type="submit" id="waitlistBtn">Join waitlist</button>
       </form>
       <div class="waitlist-success" id="waitlistSuccess">You're in. Ari will be in touch.</div>
@@ -314,8 +314,16 @@
 
     const name = document.getElementById('waitlistName').value.trim();
     const email = document.getElementById('waitlistEmail').value.trim();
-    const phone = document.getElementById('waitlistPhone').value.trim();
-    if (!name || !email || !phone) return;
+    const phoneRaw = document.getElementById('waitlistPhone').value.trim();
+    if (!name || !email || !phoneRaw) return;
+
+    const digits = phoneRaw.replace(/\D/g, '').replace(/^1/, '');
+    if (digits.length !== 10) {
+      errorEl.textContent = 'Please enter a valid US phone number.';
+      errorEl.style.display = 'block';
+      return;
+    }
+    const phone = '+1' + digits;
 
     btn.disabled = true;
     btn.textContent = 'Joining\u2026';
